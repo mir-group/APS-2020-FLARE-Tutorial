@@ -1,0 +1,20 @@
+units	metal
+atom_style atomic
+newton on
+
+read_data Al.data
+
+pair_style	flare
+pair_coeff	* * lmp.flare
+
+compute unc all flare/std/atom L_inv_lmp.flare sparse_desc_lmp.flare
+compute MaxUnc all reduce max c_unc
+
+mass            1 26.98
+
+velocity all create 300.0 4928459 rot yes dist gaussian
+fix 1 all nvt temp 300 300 $(100.0*dt)
+dump dump_all all custom 10 output.dump id type x y z fx fy fz c_unc
+fix thermoprint all print 10 "$(step) $(temp) $(ke) $(pe) $(etotal) $(pxx) $(pyy) $(pzz) $(pyz) $(pxz) $(pxy) $(c_MaxUnc)" append thermo.txt
+
+run 1000
