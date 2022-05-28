@@ -1,0 +1,5 @@
+# Set up On-the-fly training and MD
+otf: # On-the-fly training and MD
+    mode: restart                                                               # Restart an active learning trajectory.
+    number_of_steps: 20                                                         # set the maximum number of MD steps. This is not additive on previous steps. E.g., if you already ran a simulation for 10 steps, this restart set-up will stop at 20 total steps, not 10 + 20.
+    checkpoint: Al_checkpt.json                                   # Point to the checkpoint file from which you want to restart. The lmp.flare file also needs to be present in this directory.
