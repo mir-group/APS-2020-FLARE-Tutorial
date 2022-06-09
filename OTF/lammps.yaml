@@ -59,14 +59,6 @@ otf:
         dump_period: 10
         pair_style: flare
         fix: ["1 all nve"]
-#        region: 
-#            - "bottom block INF INF INF INF INF 4.0\n"
-#        group: 
-#            - "frozen region bottom"
-#            - "mobile subtract all frozen"
-#        fix: 
-#            - "1 mobile nvt temp 2500 2500 $(100.0*dt)"
-#            - "2 frozen setforce 0 0 0"
         keep_alive: False
     initial_velocity: 1000
     dt: 0.001 # timestep is 1 fs
@@ -75,7 +67,7 @@ otf:
     init_atoms: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     std_tolerance_factor: -0.02
     max_atoms_added: -1
-    freeze_hyps: 200
+    train_hyps: [5,inf]
     write_model: 4
     update_style: threshold
     update_threshold: 0.002
