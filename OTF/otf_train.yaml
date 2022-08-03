@@ -25,7 +25,7 @@ flare_calc:
     stress_noise: 0.001                                                         # Stress noise hyperparameter, will be trained later. Typically set to 0.001 meV/A^3.
     energy_training: True
     force_training: True
-    stress_training: False
+    stress_training: True
     species:
         - 13                                                                    # Atomic number of your species (here, 13 = Al).
     single_atom_energies:
