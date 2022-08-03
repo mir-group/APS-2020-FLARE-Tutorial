@@ -1,7 +1,7 @@
 # Super cell is read from a file such as POSCAR, xyz, lammps-data
 # # or any format that ASE supports
 supercell: 
-    file: VelocityVerlet_4_dft.xyz                                              # Use previously generated DFT frames as input
+    file: Al_dft.xyz                                              # Use previously generated DFT frames as input
     format: extxyz
     index: 0
     replicate: [1, 1, 1]                                                        # Do not replicate periodically
@@ -30,14 +30,14 @@ flare_calc:
         - 0
     cutoff: 5.0
     variance_type: local
-    max_iterations: 100
+    max_iterations: 20
     use_mapping: True
 
 # Set up DFT calculator, it can be any calculator supported by ASE
 dft_calc:
     name: FakeDFT                                                               # We are going to perform "FakeDFT" since our extxyz input already contains the DFT labels
     kwargs: 
-        filename: VelocityVerlet_4_dft.xyz                                      # Point to file containing DFT frames
+        filename: Al_dft.xyz                                                   # Point to file containing DFT frames
         format: extxyz
         index: ":"
         io_kwargs: {}
@@ -48,7 +48,7 @@ otf:
     mode: fresh                                                                 # Start from empty SGP
     md_engine: Fake                                                             # Do not perform MD, just read frames sequentially
     md_kwargs: 
-        filename: VelocityVerlet_4_dft.xyz
+        filename: Al_dft.xyz
         format: extxyz
         index: ":"
         io_kwargs: {}
@@ -57,10 +57,10 @@ otf:
     number_of_steps: 100000                                                     # Set to a value greater than the number of your DFT frames
     output_name: offline                                                        # output name
     init_atoms: [0, 90]                                                         # init atoms from first frame to add to sparse set
-    std_tolerance_factor: -0.05
+    std_tolerance_factor: -0.01
     max_atoms_added: -1
     train_hyps: [0,inf]
     write_model: 4
     update_style: threshold
-    update_threshold: 0.005
+    update_threshold: 0.001
     force_only: False
