@@ -48,7 +48,7 @@ otf:
     mode: fresh                                                                 # Start from empty SGP
     md_engine: Fake                                                             # Do not perform MD, just read frames sequentially
     md_kwargs: 
-        filename: Al_dft.xyz
+        filenames: [Al_dft.xyz]
         format: extxyz
         index: ":"
         io_kwargs: {}
