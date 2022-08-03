@@ -32,7 +32,7 @@ flare_calc:
         - 0                                                                     # Single atom energies to bias the energy prediction of the model. Can help in systems with poor initial energy estimations. Length must equal the number of species.
     cutoff: 5.0                                                                 # Cutoff for the (ACE) descriptor. Typically informed by the radial distribution function of the system. Should equal the maximum value in the cutoff_matrix.
     variance_type: local                                                        # Calculate atomic uncertainties.
-    max_iterations: 100                                                         # Maximum steps taken during each hyperparameter optimization call.
+    max_iterations: 20                                                          # Maximum steps taken during each hyperparameter optimization call.
     use_mapping: True                                                           # Print mapped model (ready for use in LAMMPS) during trajectory. Model is re-mapped and replaced if new DFT calls are made throughout the trajectory.
 
 # In the tutorial, we use ASE Lennard-Jones potential as ground truth
