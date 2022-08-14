@@ -1,7 +1,7 @@
 # Super cell is read from a file such as POSCAR, xyz, lammps-data
 # # or any format that ASE supports
 supercell: 
-    file: Al_dft.xyz                                              # Use previously generated DFT frames as input
+    file: Al_otf_dft.xyz                                              # Use previously generated DFT frames as input
     format: extxyz
     index: 0
     replicate: [1, 1, 1]                                                        # Do not replicate periodically
@@ -37,7 +37,7 @@ flare_calc:
 dft_calc:
     name: FakeDFT                                                               # We are going to perform "FakeDFT" since our extxyz input already contains the DFT labels
     kwargs: 
-        filename: Al_dft.xyz                                                   # Point to file containing DFT frames
+        filename: Al_otf_dft.xyz                                                   # Point to file containing DFT frames
         format: extxyz
         index: ":"
         io_kwargs: {}
@@ -48,7 +48,7 @@ otf:
     mode: fresh                                                                 # Start from empty SGP
     md_engine: Fake                                                             # Do not perform MD, just read frames sequentially
     md_kwargs: 
-        filenames: [Al_dft.xyz]
+        filenames: [Al_otf_dft.xyz]
         format: extxyz
         index: ":"
         io_kwargs: {}
