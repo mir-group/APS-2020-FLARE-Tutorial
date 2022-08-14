@@ -2,10 +2,9 @@
 # or any format that ASE supports
 # to start from previous run, needs 3 .flare files
 supercell: 
-    file: init_Al.xyz 
+    file: Al_otf.xyz 
     format: extxyz
-    replicate: [1, 1, 1]                                                        # supercell creation. Be mindful of DFT limitations and periodicity of your cell.
-    jitter: 0.1 
+    index: -1
 
 # Set up FLARE calculator with (sparse) Gaussian process
 flare_calc:
