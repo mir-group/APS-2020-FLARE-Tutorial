@@ -2,14 +2,14 @@
 # or any format that ASE supports
 # to start from previous run, needs 3 .flare files
 supercell: 
-    file: Al_otf.xyz 
+    file: Al_otf_dft.xyz 
     format: extxyz
     index: -1
 
 # Set up FLARE calculator with (sparse) Gaussian process
 flare_calc:
     gp: SGP_Wrapper
-    file: Al_checkpt.json
+    file: Al_otf_flare.json
 
 # call dft calculator
 dft_calc:
@@ -24,7 +24,7 @@ otf: # On-the-fly training and MD
     initial_velocity: 1000                                                      # Initialize the velocities
     dt: 0.001                                                                   # Set the time step in picoseconds (1 fs here)
     number_of_steps: 10                                                         # Total number of MD steps to be taken
-    output_name: Al                                                             # Name of output
+    output_name: Al_warm                                                             # Name of output
     init_atoms: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]                          # Initial atoms to be added to the sparse set
     std_tolerance_factor: -0.01                                                 # The uncertainty threshold above which the DFT will be called
     max_atoms_added: -1                                                         # Allow for all atoms in a given frame to be added to the sparse set if uncertainties permit
