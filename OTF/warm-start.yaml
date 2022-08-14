@@ -1,0 +1,36 @@
+# Super cell is read from a file such as vasp, extxyz, lammps-data
+# or any format that ASE supports
+# to start from previous run, needs 3 .flare files
+supercell: 
+    file: init_Al.xyz 
+    format: extxyz
+    replicate: [1, 1, 1]                                                        # supercell creation. Be mindful of DFT limitations and periodicity of your cell.
+    jitter: 0.1 
+
+# Set up FLARE calculator with (sparse) Gaussian process
+flare_calc:
+    gp: SGP_Wrapper
+    file: Al_checkpt.json
+
+# call dft calculator
+dft_calc:
+    name: LennardJones
+    kwargs: {}
+
+# for MD
+otf: # On-the-fly training and MD
+    mode: fresh                                                                 # Start from an empty SGP
+    md_engine: VelocityVerlet                                                   # Define MD engine, here we use the Velocity Verlet engine from ASE. LAMMPS examples can be found in the `flare/examples` directory in the repo
+    md_kwargs: {}                                                               # Define MD kwargs
+    initial_velocity: 1000                                                      # Initialize the velocities
+    dt: 0.001                                                                   # Set the time step in picoseconds (1 fs here)
+    number_of_steps: 10                                                         # Total number of MD steps to be taken
+    output_name: Al                                                             # Name of output
+    init_atoms: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]                          # Initial atoms to be added to the sparse set
+    std_tolerance_factor: -0.01                                                 # The uncertainty threshold above which the DFT will be called
+    max_atoms_added: -1                                                         # Allow for all atoms in a given frame to be added to the sparse set if uncertainties permit
+    train_hyps: [5,inf]                                                         # Define range in which hyperparameters will be optimized. Here, hyps are optimized at every DFT call after the 5th call.
+    write_model: 4                                                              # Verbosity of model output.
+    update_style: threshold                                                     # Sparse set update style. Atoms above a defined "threshold" will be added using this method
+    update_threshold: 0.001                                                     # Threshold for adding atoms if "update_style = threshold". Threshold represents relative uncertainty to mean atomic uncertainty, where atoms above are added to sparse set
+    force_only: False
