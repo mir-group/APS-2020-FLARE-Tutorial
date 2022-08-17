@@ -36,11 +36,7 @@ flare_calc:
 # Set up DFT calculator, it can be any calculator supported by ASE
 dft_calc:
     name: FakeDFT                                                               # We are going to perform "FakeDFT" since our extxyz input already contains the DFT labels
-    kwargs: 
-        filename: Al_otf_dft.xyz                                                   # Point to file containing DFT frames
-        format: extxyz
-        index: ":"
-        io_kwargs: {}
+    kwargs: {}
     params: {}
 
 # Set up On-the-fly training and MD
